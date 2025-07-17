@@ -1,0 +1,61 @@
+What is a Checked Exception?
+Checked Exceptions are exceptions that are checked at compile-time by the Java compiler.
+If a method can throw a checked exception, it must either handle the exception using try-catch or declare it using throws keyword.
+Key Points:
+•	Subclass of Exception (but NOT RuntimeException)
+•	Must be handled or declared
+•	Occurs due to conditions that are outside the control of the program
+•	Compile-time error occurs if not handled
+Syntax Example:
+import java.io.*;
+
+public class CheckedExample {
+    public static void main(String[] args) {
+        try {
+            FileReader file = new FileReader("data.txt"); // May throw FileNotFoundException
+            BufferedReader fileInput = new BufferedReader(file);
+            System.out.println(fileInput.readLine());
+            fileInput.close();
+        } catch (IOException e) {
+            System.out.println("File error: " + e);
+        }
+    }
+}
+
+In the above example:
+•	FileReader and BufferedReader can throw IOException
+•	That’s why we handle it using try-catch
+
+Common Checked Exceptions:
+Exception Name	When It Occurs
+IOException	Input/Output failure (like file not found)
+FileNotFoundException	File does not exist
+SQLException	Database-related error
+ClassNotFoundException	Class not found while loading dynamically
+InterruptedException	When a thread is interrupted
+ParseException	Parsing failure (e.g., invalid date format)
+
+Handling Checked Exceptions:
+1.Using try-catch:
+try {
+   // risky code
+} catch (ExceptionType e) {
+   // handling code
+}
+
+2.Using throws keyword:
+public void readFile() throws IOException {
+   FileReader fr = new FileReader("data.txt");
+}
+
+Why Checked Exceptions?
+•	Forces developers to think about error handling
+•	Good for recoverable conditions (like file not found, network issue)
+
+Tip to Remember:
+•	Checked = Compiler Checks
+
+Conclusion:
+Checked exceptions in Java are a powerful feature that ensures developers handle potential errors that can be anticipated and recovered from, such as file handling or database access issues. By enforcing error handling at compile-time, they lead to more robust and reliable applications. Understanding and correctly using checked exceptions helps in building safer programs that gracefully manage external failures.
+•	In short:
+Checked = Compiler-enforced error handling = Safer code.
